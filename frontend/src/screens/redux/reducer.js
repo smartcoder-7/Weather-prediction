@@ -16,7 +16,9 @@ const weatherReducer = (state = initialtate, action) =>
         draft.loading = false;
         break;
       case CONSTANTS.FORECAST_LIST_SUCCESS:
-        draft.list = actoin.payload.data;
+        draft.list = action.payload.data;
+        break;
+      default:
         break;
     }
   });

@@ -30,8 +30,11 @@ const WeatherDetail = () => {
       <>
         {Object.entries(data.main).map((entry, index) => (
           <Row key={`detail_${index}`}>
-            <Col>{FIELD_MAP[entry[0]]['name']}</Col>
-            <Col>{entry[1] + FIELD_MAP[entry[0]]['unit']}</Col>
+            <Col>{FIELD_MAP[entry[0]] && FIELD_MAP[entry[0]]['name']}</Col>
+            <Col>
+              {FIELD_MAP[entry[0]] &&
+                entry[1] + ' ' + FIELD_MAP[entry[0]]['unit']}
+            </Col>
           </Row>
         ))}
       </>

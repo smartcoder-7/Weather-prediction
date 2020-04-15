@@ -5,6 +5,10 @@
   "main": "index.js",
   "author": "Smart Coder",
   "license": "MIT",
+  "scripts": {
+    "serve": "nodemon index.js",
+    "start": "NODE_ENV=production node inde.js"
+  },
   "dependencies": {
     "body-parse": "^0.1.0",
     "compression": "^1.7.4",

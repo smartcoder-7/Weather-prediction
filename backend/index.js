@@ -4,15 +4,9 @@ const helmet = require('helmet');
 const compression = require('compression');
 const cors = require('cors');
 const morgan = require('morgan');
-// const config = require('./config');
-// const APIError = require('./api/utils/api-error');
+const config = require('./config');
+const APIError = require('./api/utils/api-error');
 
-const initializeDB = require('./api/mongoose');
-
-// initialize db on the top to have models available below
-initializeDB();
-
-const initializePassport = require('./api/passport');
 const { apiRouter } = require('./api');
 
 const app = express();
@@ -23,8 +17,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
 app.use(cors());
-
-initializePassport(app);
 
 app.use('/', apiRouter);
 

@@ -6,17 +6,14 @@ import request from '../../utils/apiRequest';
 import notify from '../../utils/notify';
 
 export function* forecastListRequest(action) {
+  const requestData = {
+    city: action.payload.city,
+  };
   try {
-    const data = yield call(
-      request,
-      `/users/${action.city}`,
-      'GET',
-      null,
-      false,
-    );
+    const data = yield call(request, `/weather`, 'GET', requestData, false);
     yield put(forecastListSuccess(data));
   } catch (err) {
-    notify('error', err);
+    notify('error', err.message);
     yield put(forecaseListError(err));
   }
 }

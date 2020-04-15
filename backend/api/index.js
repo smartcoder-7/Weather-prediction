@@ -1,4 +1,4 @@
-const express = requrie('express');
+const express = require('express');
 const { weatherRouter } = require('./routes');
 
 const router = express.Router();

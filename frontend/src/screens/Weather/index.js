@@ -1,3 +1,4 @@
-import Weather from './Weather';
+import { WeatherDetail } from './WeatherDetail';
+import { WeatherList } from './WeatherList';
 
-export { Weather };
+export { WeatherDetail, WeatherList };

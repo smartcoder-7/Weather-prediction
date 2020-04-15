@@ -1,11 +1,12 @@
 import React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import { Weather } from './Weather';
+import { WeatherList, WeatherDetail } from './Weather';
 
 const Routes = () => {
   return (
     <Switch>
-      <Route path="/" component={Weather} />
+      <Route path="/:dt" component={WeatherDetail} />
+      <Route path="/" component={WeatherList} />
       <Redirect to="/" />
     </Switch>
   );

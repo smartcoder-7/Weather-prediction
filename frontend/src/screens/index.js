@@ -5,7 +5,7 @@ import { WeatherList, WeatherDetail } from './Weather';
 const Routes = () => {
   return (
     <Switch>
-      <Route path="/:dt" component={WeatherDetail} />
+      <Route path="/:id" component={WeatherDetail} />
       <Route path="/" component={WeatherList} />
       <Redirect to="/" />
     </Switch>

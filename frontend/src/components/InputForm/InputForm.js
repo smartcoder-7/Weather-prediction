@@ -7,14 +7,13 @@ import * as yup from 'yup';
 import { forecastListRequest } from '../../screens/redux/actions';
 
 const validationSchema = yup.object({
-  city: yup.string().required(),
+  city: yup.string().required('City is required!'),
 });
 
-const InputForm = () => {
+const InputForm = ({ isLoading }) => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (values) => {
-    const { city } = values;
+  const handleSubmit = ({ city }) => {
     dispatch(forecastListRequest({ city }));
   };
 
@@ -27,23 +26,24 @@ const InputForm = () => {
       {({ handleSubmit, handleChange, values, isValid, errors }) => (
         <Form onSubmit={handleSubmit}>
           <Form.Row>
-            <Form.Group as={Col} sm={8}>
+            <Form.Group as={Col} sm={6}>
               <Form.Control
+                type="text"
                 name="city"
                 placeholder="Input the city"
                 onChange={handleChange}
                 value={values.city}
+                isInvalid={!!errors.city}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.city}
               </Form.Control.Feedback>
             </Form.Group>
-            <Col sm={4}>
+            <Col sm={6}>
               <Button
-                block
                 variant="secondary"
                 type="submit"
-                disabled={!isValid}
+                disabled={!isValid || isLoading}
               >
                 Search
               </Button>

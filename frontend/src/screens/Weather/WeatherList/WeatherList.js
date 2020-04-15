@@ -7,21 +7,22 @@ import Pagination from 'react-paginate';
 
 import { LoadingContainer } from '../../../containers';
 import { InputForm } from '../../../components';
+import { PAGE_LIMIT } from '../../../config';
 
 const WeatherList = () => {
   const forecastList = useSelector((state) => state.app.list);
   const isLoading = useSelector((state) => state.app.isLoading);
+  const city = useSelector((state) => state.app.city);
   const [paginatedList, setPaginatedList] = useState([]);
 
   useEffect(() => {
-    console.log(forecastList.slice(0, 7));
-    setPaginatedList(forecastList.slice(0, 7));
+    setPaginatedList(forecastList.slice(0, PAGE_LIMIT));
   }, [forecastList]);
 
   const handlePageClick = (data) => {
     let selected = data.selected;
-    let skip = Math.ceil(selected * 8);
-    setPaginatedList(forecastList.slice(skip, skip + 8));
+    let skip = Math.ceil(selected * PAGE_LIMIT);
+    setPaginatedList(forecastList.slice(skip, skip + PAGE_LIMIT));
   };
 
   const renderTable = (list) => {
@@ -55,13 +56,14 @@ const WeatherList = () => {
   };
 
   return (
-    <Container>
-      <LoadingContainer loading={isLoading}>
-        <Card>
-          <Card.Header>
-            <InputForm />
-          </Card.Header>
-          <Card.Body>
+    <Container className="mt-5">
+      <InputForm isLoading={isLoading} />
+      <Card>
+        <Card.Header className="text-center">
+          {'Weather Overview' + (!!city ? ` of ${city}` : '')}
+        </Card.Header>
+        <Card.Body>
+          <LoadingContainer loading={isLoading}>
             <Table>
               <thead>
                 <tr>
@@ -73,9 +75,9 @@ const WeatherList = () => {
               </thead>
               <tbody>{renderTable(paginatedList)}</tbody>
             </Table>
-          </Card.Body>
-        </Card>
-      </LoadingContainer>
+          </LoadingContainer>
+        </Card.Body>
+      </Card>
       {!!forecastList.length && (
         <div className="card-footer d-flex">
           <Pagination

@@ -20,3 +20,10 @@ export function forecaseListError(data) {
     data,
   };
 }
+
+export function setCity(city) {
+  return {
+    type: CONSTANTS.SET_CITY,
+    city,
+  };
+}

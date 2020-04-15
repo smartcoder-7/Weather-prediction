@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, withRouter, Redirect, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import { Weather } from './Weather';
 
 const Routes = () => {

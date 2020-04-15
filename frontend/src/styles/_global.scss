@@ -1,0 +1,28 @@
+@import '~bootstrap/scss/bootstrap';
+
+#root,
+html,
+body {
+  background: white;
+  font-size: 14px;
+  color: black;
+  height: 100%;
+}
+
+html {
+  position: relative;
+  #root {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex: 1 0 auto;
+  }
+}
+
+.app-content {
+  height: 100%;
+}
+
+a:hover {
+  text-decoration: none;
+}

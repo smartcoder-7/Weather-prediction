@@ -2,17 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import { useParams, Link } from 'react-router-dom';
-
-const FIELD_MAP = {
-  temp: { name: 'Temperature', unit: 'F' },
-  feels_like: { name: 'Feels like', unit: 'F' },
-  temp_min: { name: 'Min of Temperature', unit: 'F' },
-  temp_max: { name: 'Max of Temperature', unit: 'F' },
-  pressure: { name: 'Pressure', unit: 'hpa' },
-  sea_level: { name: 'Sea Level', unit: '' },
-  grnd_level: { name: 'Ground Level', unit: '' },
-  humidity: { name: 'Humidity', unit: '%' },
-};
+import { FIELD_MAP } from '../../../utils/constants';
+import { scaleUnit } from '../../../utils/helpers';
 
 const WeatherDetail = () => {
   const { id } = useParams();
@@ -20,6 +11,7 @@ const WeatherDetail = () => {
   const city = useSelector((state) => state.app.city);
 
   const detail = forecastList.find((item) => item.dt === Number(id));
+  console.log('detail', detail);
 
   const renderDetail = (data) => {
     if (!data) {
@@ -33,7 +25,9 @@ const WeatherDetail = () => {
             <Col>{FIELD_MAP[entry[0]] && FIELD_MAP[entry[0]]['name']}</Col>
             <Col>
               {FIELD_MAP[entry[0]] &&
-                entry[1] + ' ' + FIELD_MAP[entry[0]]['unit']}
+                scaleUnit(entry[1], FIELD_MAP[entry[0]]['scaleFactor']) +
+                  ' ' +
+                  FIELD_MAP[entry[0]]['unit']}
             </Col>
           </Row>
         ))}

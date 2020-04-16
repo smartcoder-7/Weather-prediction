@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Container, Card, Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
 import Pagination from 'react-paginate';
 
 import { LoadingContainer } from '../../../containers';
 import { InputForm } from '../../../components';
-import { PAGE_LIMIT } from '../../../config';
+import { PAGE_LIMIT } from '../../../utils/constants';
+import { formatDate } from '../../../utils/helpers';
 
 const WeatherList = () => {
   const forecastList = useSelector((state) => state.app.list);
@@ -16,6 +16,7 @@ const WeatherList = () => {
   const [paginatedList, setPaginatedList] = useState([]);
 
   useEffect(() => {
+    console.log('forcastList', forecastList);
     setPaginatedList(forecastList.slice(0, PAGE_LIMIT));
   }, [forecastList]);
 
@@ -39,7 +40,7 @@ const WeatherList = () => {
     return list.map((item) => (
       <tr key={item.dt}>
         <td>
-          <Link to={`/${item.dt}`}>{moment(item.dt_text).format('LLLL')}</Link>
+          <Link to={`/${item.dt}`}>{formatDate(item.dt_txt, 'LLLL')}</Link>
         </td>
         <td>{item.weather[0].main}</td>
         <td>{item.weather[0].description}</td>
@@ -70,7 +71,7 @@ const WeatherList = () => {
                   <th>Date</th>
                   <th>Main</th>
                   <th>Desciption</th>
-                  <th>Icon</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>{renderTable(paginatedList)}</tbody>

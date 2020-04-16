@@ -7,16 +7,21 @@ import Pagination from 'react-paginate';
 import { LoadingContainer } from '../../../containers';
 import { InputForm } from '../../../components';
 import { PAGE_LIMIT } from '../../../utils/constants';
-import { formatDate } from '../../../utils/helpers';
+import {
+  formatDate,
+  renderString,
+  getPrediction,
+} from '../../../utils/helpers';
 
 const WeatherList = () => {
+  const [prediction, setPrediction] = useState('');
   const forecastList = useSelector((state) => state.app.list);
   const isLoading = useSelector((state) => state.app.isLoading);
   const city = useSelector((state) => state.app.city);
   const [paginatedList, setPaginatedList] = useState([]);
 
   useEffect(() => {
-    console.log('forcastList', forecastList);
+    setPrediction(getPrediction(['Rain, Clouds'], forecastList));
     setPaginatedList(forecastList.slice(0, PAGE_LIMIT));
   }, [forecastList]);
 
@@ -96,6 +101,7 @@ const WeatherList = () => {
           />
         </div>
       )}
+      {prediction && <p>{renderString(prediction)}</p>}
     </Container>
   );
 };

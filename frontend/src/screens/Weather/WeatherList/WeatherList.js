@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Card, Table } from 'react-bootstrap';
+import { Container, Card, Table, Alert } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Pagination from 'react-paginate';
@@ -101,7 +101,9 @@ const WeatherList = () => {
           />
         </div>
       )}
-      {prediction && <p>{renderString(prediction)}</p>}
+      {prediction && (
+        <Alert variant="primary">{renderString(prediction)}</Alert>
+      )}
     </Container>
   );
 };

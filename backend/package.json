@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "helmet": "^3.22.0",
     "morgan": "^1.10.0",
+    "openweather-apis": "^4.2.0",
     "request": "^2.88.2"
   },
   "devDependencies": {
